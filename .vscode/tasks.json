@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar con OpenMP",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-fopenmp",       // Habilita OpenMP
+                "-o", "main.exe", // Salida del ejecutable
+                "main.c"          // Archivo fuente principal
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compila el programa con soporte para OpenMP."
+        }
+    ]
+}
