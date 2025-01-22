@@ -1,30 +1,45 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <omp.h>
+#include <stdlib.h> // Para usar rand() y srand()
+#include <omp.h>    // Para la programación paralela con OpenMP
 
-#define SIZE 1000
+#define SIZE 1000 // Tamaño del arreglo
 
 int main() {
-    int a[SIZE], b[SIZE], c[SIZE];
+    int A[SIZE], B[SIZE], R[SIZE]; // Declaración de los arreglos
 
-    // Generar valores aleatorios para los arreglos
+    // Inicializar el generador de números aleatorios
+    srand(42); // Usar una semilla fija para resultados reproducibles
+
+    // Generar valores aleatorios para los arreglos A y B
     for (int i = 0; i < SIZE; i++) {
-        a[i] = rand() % 100;  // Valores aleatorios entre 0 y 99
-        b[i] = rand() % 100;
+        A[i] = rand() % 100; // Valores entre 0 y 99
+        B[i] = rand() % 100; // Valores entre 0 y 99
     }
 
-    // Paralelizar el bucle para sumar los arreglos
-    #pragma omp parallel for
+    // Sumar los arreglos en paralelo usando 2 threads
+    #pragma omp parallel for num_threads(2) // Usar 2 threads
     for (int i = 0; i < SIZE; i++) {
-        c[i] = a[i] + b[i];
+        R[i] = A[i] + B[i];
     }
 
-    // Imprimir los primeros 10 elementos de cada arreglo
-    printf("Primeros 10 elementos de A, B y C:\n");
+    // Imprimir una parte de los arreglos para verificar
+    printf("Primeros 10 elementos de los arreglos:\n");
+    printf("A:\t");
     for (int i = 0; i < 10; i++) {
-        printf("A[%d]=%d, B[%d]=%d, C[%d]=%d\n", i, a[i], i, b[i], i, c[i]);
+        printf("%d ", A[i]);
     }
+
+    printf("\nB:\t");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", B[i]);
+    }
+
+    printf("\nR:\t");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", R[i]);
+    }
+
+    printf("\n");
 
     return 0;
 }
-
