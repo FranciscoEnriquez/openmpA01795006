@@ -4,11 +4,11 @@
         {
             "label": "Compilar con OpenMP",
             "type": "shell",
-            "command": "gcc",
+            "command": "g++",
             "args": [
                 "-fopenmp",       // Habilita OpenMP
                 "-o", "main.exe", // Salida del ejecutable
-                "main.c"          // Archivo fuente principal
+                "main.cpp"          // Archivo fuente principal
             ],
             "group": {
                 "kind": "build",
